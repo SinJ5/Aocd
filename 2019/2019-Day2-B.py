@@ -1,43 +1,28 @@
+from aocd.models import Puzzle
+from int_code_computer import IntCodeComputer
 
-def readFile ( ):
-    ''' nacte vstupni soubor a prevede na list integeru'''
-    f = open("day2", "r")
-    Text = f.readlines()
-    f.close()
-    inputs = Text[0].split(",")
-    out=[]
-    for each in inputs:
-        out.append(int (each))
-    return out
+puzzle = Puzzle(year=2019, day=2)
+target = 19690720
 
-def doOpt(prog,op ,indexA,indexB,indexOut):
-    '''provede operaci  op nad daty z indexu A a B a vysledek ulozi do indexu Out '''
-    valA=prog[indexA]
-    valB=prog[indexB]
-    if(op==1):
-        prog[indexOut]=valA+valB
-    if(op==2):
-        prog[indexOut] = valA * valB
+prog = [int(x) for x in puzzle.input_data.split(",")]
 
-
-def partA( val1 ,val2):
-    '''provede program se zadanym prametrm val1 a val2'''
-    prog = readFile()
-    actualIndex = 0
-    prog[1] = val1
-    prog[2] = val2
-    while prog[actualIndex] != 99:
-        doOpt(prog,prog[actualIndex], prog[actualIndex + 1], prog[actualIndex + 2], prog[actualIndex + 3])
-        actualIndex += 4
-    return prog[0]
+comp = IntCodeComputer(prog)
 
 
 
-def partB(target):
-    for noun in range(0,99,1):
-        for verb in range(0,99,1):
-            if(partA(noun,verb)==target):
-                return (noun*100)+verb
+def compute(n, v):
+    comp.reset()
+    comp.prog[1] = n
+    comp.prog[2] = v
+    comp.parseCode([])
+    return comp.prog[0]
 
 
-print("partB:" ,partB(19690720))
+for noun in range(0, 99, 1):
+    for verb in range(0, 99, 1):
+        tmp = compute(noun, verb)
+        if tmp == target:
+            result = (noun * 100) + verb
+            print("2019-Day2-B result:", result)
+            puzzle.answer_b = result
+            exit(0)
