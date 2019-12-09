@@ -28,3 +28,5 @@ for i in range(input_data[0], input_data[1], 1):
     result += podminka(i)
 
 print("2019-Day4-A result:", result)
+puzzle.answer_a=result
+
