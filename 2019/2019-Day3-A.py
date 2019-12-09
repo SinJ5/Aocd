@@ -71,6 +71,6 @@ for la in LinesA:
             result=tmp
 
 
-print("2019-Day2-A result:",result)
+print("2019-Day3-A result:",result)
 puzzle.answer_a=result
 
