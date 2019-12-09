@@ -83,7 +83,7 @@ class IntCodeComputer:
     def if_equal(self, op):
         valA = self.getValue((op // 100) % 10)
         valB = self.getValue((op // 1000) % 10)
-        if (valA < valB):
+        if (valA == valB):
             self.prog[self.prog[self.step]] = 1
         else:
             self.prog[self.prog[self.step]] = 0
