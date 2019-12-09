@@ -23,7 +23,7 @@ class IntCodeComputer:
         self.step += 1
 
     def reset(self):
-        self.prog = self.code
+        self.prog = self.code.copy()
 
     def next_input(self):
         self.input_index += 1
