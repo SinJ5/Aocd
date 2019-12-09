@@ -1,8 +1,8 @@
 class IntCodeComputer:
 
     def __init__(self, code):
-        self.code = code
-        self.prog = code
+        self.code = code.copy()
+        self.prog = code.copy()
         self.step = 0
         self.input_index = 0
         self.output = 0
