@@ -1,8 +1,10 @@
-f = open("Day1a", "r")
-data = f.readlines()
-f.close()
+from aocd.models import Puzzle
 
-sumary = 0
+puzzle = Puzzle(year=2019, day=1)
+
+data = puzzle.input_data.split("\n")
+
+summary = 0
 
 
 def fuelCount(mass):
@@ -15,6 +17,8 @@ def fuelCount(mass):
 
 for tmp in data:
     val = fuelCount(tmp)
-    sumary += val
+    summary += val
 
-print(" sum  Part1: ", sumary)
+print("2019-Day1-A result: ", summary)
+
+puzzle.answer_a = summary
