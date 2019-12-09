@@ -62,13 +62,13 @@ class IntCodeComputer:
     def if_true(self, op):
         valA = self.getValue((op // 100) % 10)
         valB = self.getValue((op // 1000) % 10)
-        if valA == 0:
+        if valA != 0:
             self.step = valB
 
     def if_false(self, op):
         valA = self.getValue((op // 100) % 10)
         valB = self.getValue((op // 1000) % 10)
-        if valA != 0:
+        if valA == 0:
             self.step = valB
 
     def if_less(self, op):
