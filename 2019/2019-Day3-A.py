@@ -1,9 +1,11 @@
-def readFile():
-    ''' nacte vstupni soubor '''
-    f = open("Day3", "r")
-    Text = f.readlines()
-    f.close()
-    return Text
+from aocd.models import Puzzle
+
+
+puzzle = Puzzle(year=2019, day=3)
+
+AllVal=puzzle.input_data.split("\n")
+
+
 
 def createLine(x,y,val):
     ''' vytvopri tuple , ktery obhsahuje pocatecni souradnice usecky a konecne souradnice usecky a delku'''
@@ -47,7 +49,7 @@ def isIn(val, A ,B):
     return False
 
 def isCrosed(lineA,lineB):
-    ''' zjistuje zda se primky protinaji   vraci '''
+    ''' zjistuje zda se primky protinaji   vraci vzdalenost  '''
     if((lineA[0]-lineA[2]!=0 and  lineB[0]-lineB[2]!=0) or(lineA[1]-lineA[3]!=0 and  lineB[1]-lineB[3]!=0) ):
         return 99999999  # linky jsou rovnobezne
 
@@ -58,41 +60,17 @@ def isCrosed(lineA,lineB):
         return abs(lineA[1]) + abs(lineB[0])
     return 99999999
 
-def partA():
-    AllVal=readFile()
-    LinesA=createAllLinesForOneWire(AllVal[0])
-    LinesB = createAllLinesForOneWire(AllVal[1])
-    out= 99999999
-    for la in LinesA:
-        for lb in LinesB:
-            tmp = isCrosed(la,lb)
-            if(tmp<out):
-                out=tmp
-    return out
 
-print("day3partA:",partA())
+LinesA=createAllLinesForOneWire(AllVal[0])
+LinesB = createAllLinesForOneWire(AllVal[1])
+result= 99999999
+for la in LinesA:
+    for lb in LinesB:
+        tmp = isCrosed(la,lb)
+        if(tmp<result):
+            result=tmp
 
 
-def partB():
-    AllVal = readFile()
-    LinesA = createAllLinesForOneWire(AllVal[0])
-    LinesB = createAllLinesForOneWire(AllVal[1])
-    out = 99999999
-    tempA=0
-    tempB=0
-    for la in LinesA:
-        tempB=0
-        for lb in LinesB:
-            tmp = isCrosed(la, lb)
-            if (tmp !=99999999 ):
-                tmp =(tempA + tempB)
-                tmp +=abs(la[0]-lb[0])
-                tmp += abs(la[1] - lb[1])
-                if(tmp<out):
-                    out=tmp
-            tempB += lb[4]
-        tempA += la[4]
-    return out
+print("2019-Day2-A result:",result)
+puzzle.answer_a=result
 
-
-print("day3partB:",partB())
