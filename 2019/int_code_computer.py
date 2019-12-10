@@ -6,8 +6,9 @@ class IntCodeComputer:
         self.step = 0
         self.input_index = 0
         self.output = 0
-        self.inputs = ()
+        self.inputs = []
         self.stop = False
+        self.reachEndofCode=False
         self.cmd = {1: self.sum,
                     2: self.mult,
                     3: self.input,
@@ -24,11 +25,13 @@ class IntCodeComputer:
 
     def reset(self):
         self.prog = self.code.copy()
+        self.step=0
+        self.inputs=[]
+        self.input_index=0
+        self.reachEndofCode = False
 
-    def next_input(self):
-        self.input_index += 1
-        if (self.input_index >= len(self.inputs)):
-            self.input_index = 0
+
+
 
     def getValue(self, position_type):
         if position_type == 0:
@@ -51,13 +54,18 @@ class IntCodeComputer:
         self.addstep()
 
     def input(self, op):
+        if(self.input_index>=len(self.inputs)):
+            self.stop=True
+            self.step-=1
+            return
         self.prog[self.prog[self.step]] = self.inputs[self.input_index]
         self.addstep()
-        self.next_input()
+        self.input_index+=1
 
     def out(self, op):
         self.output = self.prog[self.prog[self.step]]
         self.addstep()
+
 
     def if_true(self, op):
         valA = self.getValue((op // 100) % 10)
@@ -91,16 +99,22 @@ class IntCodeComputer:
 
     def end(self,op):
         self.stop=True
+        self.reachEndofCode=True
+        self.step-=1
 
     def getNext(self):
         out = self.prog[self.step]
         self.addstep()
         return out
 
-    def parseCode(self, inputs=[0]):
-        self.inputs = inputs
-        self.input_index = 0
-        self.step=0
+    def parseCode(self, inputs=[0],resetStep=True,appendInput=False):
+        if(appendInput):
+            self.inputs+=inputs
+        else:
+            self.inputs=inputs
+            self.input_index = 0
+        if resetStep:
+            self.step=0
         self.stop=False
 
         while not self.stop:
