@@ -48,8 +48,8 @@ class Robot:
         key = self.posistionTag()
         if self.map.get(key) != None:
             return self.map.get(key)
-        self.map[key] = self.defVal
-        return self.defVal
+        self.map[key] = BLACK
+        return BLACK
 
     def paint(self, val):
         key = self.posistionTag()
@@ -66,7 +66,7 @@ class Robot:
 
     def run(self):
         self.brain.reset()
-        self.brain.addInput(0)
+        self.brain.addInput(self.defVal)
         output = []
 
         while self.brain.run() != STATUS_END_OF_PROGRAM:
