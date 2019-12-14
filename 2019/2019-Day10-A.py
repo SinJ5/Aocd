@@ -1,5 +1,6 @@
 from aocd.models import Puzzle
-import math
+
+
 
 puzzle = Puzzle(year=2019, day=10)
 
@@ -7,12 +8,12 @@ data = puzzle.input_data.split("\n")
 
 # data=["......#.#.","#..#.#....","..#######.",".#.#.###..",".#..#.....","..#....#.#","#..#....#.",".##.#..###","##...#..#.",".#....####"]
 # data=[".#..#",".....","#####","....#","...##"]
-meteorlist = []
-for y in range(0, len(data)):
-    for x in range(0, len(data[y])):
-        if data[y][x] == "#":
-            meteorlist.append((x, y))
+
+meteorlist=[]
+for y,row in enumerate(data):
+    meteorlist+=[(x,y) for x,val in enumerate(row) if val=="#"]
 print("number of meteroit", len(meteorlist))
+print("meterolist",meteorlist)
 
 
 def isIn(a, b, c):

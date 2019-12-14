@@ -5,12 +5,10 @@ puzzle = Puzzle(year=2019, day=10)
 
 data = puzzle.input_data.split("\n")
 
+meteorlist=[]
+for y,row in enumerate(data):
+    meteorlist+=[(x,y) for x,val in enumerate(row) if val=="#"]
 
-meteorlist = []
-for y in range(0, len(data)):
-    for x in range(0, len(data[y])):
-        if data[y][x] == "#":
-            meteorlist.append((x, y))
 
 best=(17,22)
 
