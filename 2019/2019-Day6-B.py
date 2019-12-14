@@ -48,7 +48,7 @@ def search(orb):
     if orb.me == "SAN":
         result = orb.deep
         puzzle.answer_b = result - 2
-        print("in search result", result - 2)
+        print("2019-Day6-B result:", result-2)
         return True
     for o in orb.orbiters:
         if o.me in seen:

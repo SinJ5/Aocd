@@ -36,6 +36,6 @@ for orb in orbits:
     to.setParent(fr)
 
 result = seznam.get("COM").cnt(1)
-print("result:", result)
+print("2019-Day6-A result:", result)
 
 puzzle.answer_a = result
