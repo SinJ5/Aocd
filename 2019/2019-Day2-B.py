@@ -1,21 +1,21 @@
 from aocd.models import Puzzle
-from int_code_computer import IntCodeComputer
+from int_code_computer2 import IntCodeComputer2
 
 puzzle = Puzzle(year=2019, day=2)
 target = 19690720
 
 prog = [int(x) for x in puzzle.input_data.split(",")]
 
-comp = IntCodeComputer(prog)
+comp = IntCodeComputer2(prog)
 
 
 
 def compute(n, v):
     comp.reset()
-    comp.prog[1] = n
-    comp.prog[2] = v
-    comp.parseCode([])
-    return comp.prog[0]
+    comp.program[1] = n
+    comp.program[2] = v
+    comp.run()
+    return comp.program[0]
 
 
 for noun in range(0, 99, 1):
@@ -26,3 +26,4 @@ for noun in range(0, 99, 1):
             print("2019-Day2-B result:", result)
             puzzle.answer_b = result
             exit(0)
+
