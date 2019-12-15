@@ -15,9 +15,9 @@ class Robot:
         self.direction = UP
         self.position = [0, 0]
         if default==BLACK:
-            self.map = {"0,0": 0}
+            self.map = {(0,0): 0}
         else:
-            self.map = {"0,0": 1}
+            self.map = {(0,0): 1}
         self.mem=set([])
         self.defVal=default
         self.paintCount = 0
@@ -31,9 +31,9 @@ class Robot:
 
     def move(self):
         if (self.direction == UP):
-            self.position[1] += 1
-        elif (self.direction == DOWN):
             self.position[1] -= 1
+        elif (self.direction == DOWN):
+            self.position[1] += 1
         elif (self.direction == RIGHT):
             self.position[0] += 1
         elif (self.direction == LEFT):
@@ -42,7 +42,7 @@ class Robot:
             raise Exception("wrong direction")
 
     def posistionTag(self):
-        return str(self.position[0]) + "," + str(self.position[1])
+        return (self.position[0] ,self.position[1])
 
     def sensors(self):
         key = self.posistionTag()
