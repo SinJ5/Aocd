@@ -1,5 +1,5 @@
 from aocd.models import Puzzle
-
+from ShowMap import ShowMap
 puzzle = Puzzle(year=2019, day=8)
 
 layer_width = 25
@@ -16,14 +16,11 @@ for img_pos in range(0,layer_len):
         if(pixel<2):
             result_img[img_pos]=pixel
             break
+dmap =ShowMap({0:" ",1:"#"})
+dmap.makeFrame({(pos%layer_width,pos//layer_width):val for pos,val in enumerate(result_img)})
+dmap.draw()
 
-result = ''.join(map(str, result_img))
-result = result.replace("0"," ")
-result = result.replace("1","*")
-tmp=[]
-for i in range(0,layer_height):
-    tmp.append(result[i*layer_width:((i+1)*layer_width)])
-tmp2='\n'.join(tmp)
+
 
 print("2019-Day8-B result:", "GKCKH")
 puzzle.answer_b = "GKCKH"
