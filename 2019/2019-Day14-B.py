@@ -66,8 +66,8 @@ def makeReaction(ore,amount,name):
     if need[name]==0:
         del need[name]
     return ore
-MAX_ORE=1000000000000
-maxOre =MAX_ORE
+
+maxOre =1000000000000
 result=0
 
 while maxOre>0:
