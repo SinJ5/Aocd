@@ -60,6 +60,10 @@ class IntCodeComputer2:
         self.debug("add input value=", val)
         self.inputs.append(val)
 
+    def addInputAll(self, val):
+        self.debug("add inputAll value=", val)
+        self.inputs=val
+
     def get_arg_mode(self, op, i):
         tmp = str(op).rjust(5, "0")
         self.debug("get_arg_mode op:", op, " i:", i, " =", int(tmp[-3 - i]))
